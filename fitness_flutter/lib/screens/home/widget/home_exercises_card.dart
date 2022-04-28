@@ -24,7 +24,7 @@ class WorkoutCard extends StatelessWidget {
           right: 12,
         ),
         height: 160,
-        width: screenWidth * 0.6,
+        width: screenWidth * 0.8,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: color,
@@ -39,7 +39,7 @@ class WorkoutCard extends StatelessWidget {
                   children: [
                     const SizedBox(height: 5),
                     Text(
-                      workout.title ?? "", //fix bug
+                      workout.title.toString(), //fix bug
                       style: TextStyle(
                         color: ColorConstants.white,
                         fontSize: 24,
@@ -69,10 +69,10 @@ class WorkoutCard extends StatelessWidget {
               ],
             ),
             Positioned(
-              right: 0,
-              bottom: 0,
+              right: 12,
+              top: 15,
               child: Image(
-                image: AssetImage(workout.image ?? ""), //fix bug
+                image: AssetImage(workout.image.toString()), //fix bug
               ),
             ),
           ],

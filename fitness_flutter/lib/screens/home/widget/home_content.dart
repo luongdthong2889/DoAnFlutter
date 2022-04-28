@@ -51,6 +51,9 @@ class HomeContent extends StatelessWidget {
     );
   }
   Widget _createProfileData(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+    
+    final photoURL = user?.photoURL ?? null;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -60,12 +63,8 @@ class HomeContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               BlocBuilder<HomeBloc, HomeState>(
-                buildWhen: (_, currState) =>
-                    currState is ReloadDisplayNameState,
                 builder: (context, state) {
-                  final displayName = state is ReloadDisplayNameState
-                      ? state.displayName
-                      : '[name]';
+                  final displayName = user?.displayName ?? "No Username";
                   return Text(
                     'Hi, $displayName',
                     style: TextStyle(

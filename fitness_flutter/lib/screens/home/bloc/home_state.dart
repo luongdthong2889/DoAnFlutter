@@ -13,14 +13,6 @@ class ReloadImageState extends HomeState {
   });
 }
 
-class ReloadDisplayNameState extends HomeState {
-  final String? displayName;
-
-  ReloadDisplayNameState({
-    required this.displayName,
-  });
-}
-
 class WorkoutsGotState extends HomeState {
   final List<WorkoutData> workouts;
 

@@ -35,9 +35,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             : print('no image');
       }
       yield ReloadImageState(photoURL: photoURL);
-    } else if (event is ReloadDisplayNameEvent) {
-      final displayName = await UserStorageService.readSecureData('name');
-      yield ReloadDisplayNameState(displayName: displayName);
     }
   }
 

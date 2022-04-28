@@ -97,7 +97,7 @@ class WorkoutCard extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
                         child:
-                            Image.asset(workout.image ?? "", fit: BoxFit.fill),
+                            Image.asset(workout.image.toString(), fit: BoxFit.fill),
                       ),
                     ),
                   ],

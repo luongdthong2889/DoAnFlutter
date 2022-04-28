@@ -23,7 +23,6 @@ class HomePage extends StatelessWidget {
           final bloc = BlocProvider.of<HomeBloc>(context);
           if (state is HomeInitial) {
             bloc.add(HomeInitialEvent());
-            bloc.add(ReloadDisplayNameEvent());
             bloc.add(ReloadImageEvent());
           }
           return HomeContent(workouts: bloc.workouts);
