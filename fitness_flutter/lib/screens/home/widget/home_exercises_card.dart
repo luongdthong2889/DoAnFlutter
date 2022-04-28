@@ -24,7 +24,7 @@ class WorkoutCard extends StatelessWidget {
           right: 12,
         ),
         height: 160,
-        width: screenWidth * 0.6,
+        width: screenWidth * 0.8, //fix bug
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
           color: color,
@@ -70,7 +70,7 @@ class WorkoutCard extends StatelessWidget {
             ),
             Positioned(
               right: 0,
-              bottom: 0,
+              top: 10,
               child: Image(
                 image: AssetImage(workout.image ?? ""), //fix bug
               ),

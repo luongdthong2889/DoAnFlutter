@@ -50,7 +50,10 @@ class HomeContent extends StatelessWidget {
       ),
     );
   }
+
   Widget _createProfileData(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+    final displayName = user?.displayName ?? "No Username";
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -59,21 +62,12 @@ class HomeContent extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BlocBuilder<HomeBloc, HomeState>(
-                buildWhen: (_, currState) =>
-                    currState is ReloadDisplayNameState,
-                builder: (context, state) {
-                  final displayName = state is ReloadDisplayNameState
-                      ? state.displayName
-                      : '[name]';
-                  return Text(
-                    'Hi, $displayName',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                },
+              Text(
+                'Hi, $displayName',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 2),
               Text(
@@ -88,10 +82,10 @@ class HomeContent extends StatelessWidget {
           BlocBuilder<HomeBloc, HomeState>(
             buildWhen: (_, currState) => currState is ReloadImageState,
             builder: (context, state) {
-              final photoURL =
-                  state is ReloadImageState ? state.photoURL : null;
+              final photoUrl =
+                  FirebaseAuth.instance.currentUser?.photoURL ?? null;
               return GestureDetector(
-                child: photoURL == null
+                child: photoUrl == null
                     ? CircleAvatar(
                         backgroundImage: AssetImage(PathConstants.profile),
                         radius: 25)
@@ -99,7 +93,7 @@ class HomeContent extends StatelessWidget {
                         child: ClipOval(
                             child: FadeInImage.assetNetwork(
                                 placeholder: PathConstants.profile,
-                                image: photoURL,
+                                image: photoUrl,
                                 fit: BoxFit.cover,
                                 width: 200,
                                 height: 120)),
@@ -116,11 +110,13 @@ class HomeContent extends StatelessWidget {
       ),
     );
   }
+
   Widget _showStartWorkout(BuildContext context, HomeBloc bloc) {
     return workouts.isEmpty
         ? _createStartWorkout(context, bloc)
         : HomeStatistics();
   }
+
   Widget _createStartWorkout(BuildContext context, HomeBloc bloc) {
     final blocTabBar = BlocProvider.of<TabBarBloc>(context);
     return Container(
@@ -174,6 +170,7 @@ class HomeContent extends StatelessWidget {
       ),
     );
   }
+
   Widget _createExercisesList(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,9 +218,11 @@ class HomeContent extends StatelessWidget {
       ],
     );
   }
+
   Widget _showProgress(HomeBloc bloc) {
     return workouts.isNotEmpty ? _createProgress(bloc) : Container();
   }
+
   Widget _createProgress(HomeBloc bloc) {
     return Container(
       width: double.infinity,

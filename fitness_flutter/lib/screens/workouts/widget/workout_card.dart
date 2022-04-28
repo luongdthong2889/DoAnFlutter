@@ -94,12 +94,10 @@ class WorkoutCard extends StatelessWidget {
                     ),
                     SizedBox(width: 60),
                     Expanded(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child:
-                            Image.asset(workout.image ?? "", fit: BoxFit.fill),
-                      ),
-                    ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Image.asset(workout.image.toString(),
+                                fit: BoxFit.fill))),
                   ],
                 ),
               ),
@@ -109,6 +107,7 @@ class WorkoutCard extends StatelessWidget {
       ),
     );
   }
+
   int _getWorkoutMinutes() {
     var minutes = 0;
     final minutesList =
