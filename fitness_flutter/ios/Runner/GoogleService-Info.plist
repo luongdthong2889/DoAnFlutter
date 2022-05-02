@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>726409872821-p53ueo7d41kp81gjqhf7f611gtf62uek.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.726409872821-p53ueo7d41kp81gjqhf7f611gtf62uek</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>726409872821-4uj0tb5lvfaohh60cn63pvh6di8l3nuv.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCGGBXkIjp2IGh-sIDyJJBBwRagBYV8RHE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>726409872821</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.fitnessFlutter</string>
+	<key>PROJECT_ID</key>
+	<string>fitness-45cea</string>
+	<key>STORAGE_BUCKET</key>
+	<string>fitness-45cea.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:726409872821:ios:817f0349dd3e800d4605fc</string>
+</dict>
+</plist>
