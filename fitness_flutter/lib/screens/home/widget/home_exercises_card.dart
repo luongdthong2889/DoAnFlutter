@@ -48,7 +48,7 @@ class WorkoutCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     Text(
-                      "${workout.exercises} exercises",
+                      "${workout.exerciseDataList!.length} exercises",
                       style: TextStyle(
                         color: ColorConstants.white,
                         fontSize: 16,
@@ -57,7 +57,7 @@ class WorkoutCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 5),
                     Text(
-                      "${workout.minutes} minutes",
+                      "${_getWorkoutMinutes()} minutes",
                       style: TextStyle(
                         color: ColorConstants.white,
                         fontSize: 16,
@@ -79,5 +79,15 @@ class WorkoutCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+    int _getWorkoutMinutes() {
+    var minutes = 0;
+    final minutesList =
+        workout.exerciseDataList!.map((e) => e.minutes).toList();
+    minutesList.forEach((e) {
+      minutes += e!;
+    });
+    return minutes;
   }
 }
