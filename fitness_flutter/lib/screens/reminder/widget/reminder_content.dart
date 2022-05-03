@@ -112,7 +112,7 @@ class RepeatingDay extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 7),
         decoration: BoxDecoration(
           color: isSelected
-              ? ColorConstants.primaryColor
+              ? Color(0xFF6358E1)
               : ColorConstants.grey.withOpacity(0.18),
           borderRadius: BorderRadius.circular(20),
         ),

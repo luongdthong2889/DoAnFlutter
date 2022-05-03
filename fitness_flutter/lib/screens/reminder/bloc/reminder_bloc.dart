@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:fitness_flutter/core/const/color_constants.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:meta/meta.dart';
 import 'package:timezone/timezone.dart' as tz;
@@ -34,8 +36,9 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
       DateTime dateTime, int? dayTime) async {
     final flutterNotificationsPlugin = FlutterLocalNotificationsPlugin();
     final androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'your other channel id', 'your other channel name');
-    // 'your other channel description'); //fix bug
+        'your other channel id', 'your other channel name',channelDescription: 'your channel description',
+        // Specify the color
+          color: ColorConstants.primaryColor.withOpacity(0.12));
     final iOSPlatformChannelSpecifics = IOSNotificationDetails();
     NotificationDetails platformChannelSpecifics = NotificationDetails(
         android: androidPlatformChannelSpecifics,
