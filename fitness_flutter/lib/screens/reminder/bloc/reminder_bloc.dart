@@ -8,7 +8,7 @@ import 'package:timezone/timezone.dart' as tz;
 part 'reminder_event.dart';
 part 'reminder_state.dart';
 
-class ReminderBloc extends Bloc<ReminderEvent,ReminderState> {
+class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
   ReminderBloc() : super(ReminderInitial());
 
   int? selectedRepeatDayIndex;
@@ -16,7 +16,7 @@ class ReminderBloc extends Bloc<ReminderEvent,ReminderState> {
   int? dayTime;
 
   @override
-Stream<ReminderState> mapEventToState(ReminderEvent event) async* {
+  Stream<ReminderState> mapEventToState(ReminderEvent event) async* {
     if (event is RepeatDaySelectedEvent) {
       selectedRepeatDayIndex = event.index;
       dayTime = event.dayTime;
@@ -29,13 +29,13 @@ Stream<ReminderState> mapEventToState(ReminderEvent event) async* {
       yield OnSaveTappedState();
     }
   }
+
   Future _scheuleAtParticularTimeAndDate(
       DateTime dateTime, int? dayTime) async {
     final flutterNotificationsPlugin = FlutterLocalNotificationsPlugin();
     final androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'your other channel id',
-        'your other channel name');
-        // 'your other channel description'); //fix bug
+        'your other channel id', 'your other channel name');
+    // 'your other channel description'); //fix bug
     final iOSPlatformChannelSpecifics = IOSNotificationDetails();
     NotificationDetails platformChannelSpecifics = NotificationDetails(
         android: androidPlatformChannelSpecifics,
@@ -43,8 +43,8 @@ Stream<ReminderState> mapEventToState(ReminderEvent event) async* {
 
     await flutterNotificationsPlugin.zonedSchedule(
       1,
-      "Fitness",
-      "Hey, it's time to start your exercises!",
+      "Đã đến giờ tập rồi",
+      "Hãy bắt đầu bài tập ngay thôi nào!",
       _scheduleWeekly(dateTime, days: _createNotificationDayOfTheWeek(dayTime)),
       platformChannelSpecifics,
       uiLocalNotificationDateInterpretation:
@@ -53,6 +53,7 @@ Stream<ReminderState> mapEventToState(ReminderEvent event) async* {
       matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
     );
   }
+
   tz.TZDateTime _scheduleDaily(DateTime dateTime) {
     final now = tz.TZDateTime.now(tz.local);
     var timezoneOffset = DateTime.now().timeZoneOffset;
@@ -74,6 +75,7 @@ Stream<ReminderState> mapEventToState(ReminderEvent event) async* {
 
     return scheduleDate;
   }
+
   List _createNotificationDayOfTheWeek(int? dayTime) {
     switch (dayTime) {
       case 0:
