@@ -136,7 +136,7 @@
 //                 },
 //               ),
 //             SettingsContainer(
-//                 onTap: () => launch('https://perpet.io/'),
+//                 onTap: () => launch('https://huflit.edu.vn/'),
 //                 child: Text(TextConstants.terms,
 //                     style:
 //                         TextStyle(fontSize: 17, fontWeight: FontWeight.w500))),
@@ -158,7 +158,7 @@
 //               children: [
 //                 TextButton(
 //                     onPressed: () =>
-//                         launch('https://www.facebook.com/luongdthong28899/'),
+//                         launch('https://www.facebook.com/'),
 //                     style: TextButton.styleFrom(
 //                         shape: CircleBorder(),
 //                         backgroundColor: Colors.white,
@@ -166,14 +166,14 @@
 //                     child: Image.asset(PathConstants.facebook)),
 //                 TextButton(
 //                     onPressed: () =>
-//                         launch('https://www.instagram.com/luong.dthong.2889/'),
+//                         launch('https://www.instagram.com/'),
 //                     style: TextButton.styleFrom(
 //                         shape: CircleBorder(),
 //                         backgroundColor: Colors.white,
 //                         elevation: 1),
 //                     child: Image.asset(PathConstants.instagram)),
 //                 TextButton(
-//                     onPressed: () => launch('https://twitter.com/perpetio'),
+//                     onPressed: () => launch('https://twitter.com/'),
 //                     style: TextButton.styleFrom(
 //                         shape: CircleBorder(),
 //                         backgroundColor: Colors.white,
@@ -287,7 +287,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 },
               ),
             SettingsContainer(
-                onTap: () => launch('https://perpet.io/'), child: Text(TextConstants.terms, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500))),
+                onTap: () => launch('https://huflit.edu.vn/'), child: Text(TextConstants.terms, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500))),
             SettingsContainer(
                 child: Text(TextConstants.signOut, style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500)),
                 onTap: () {
@@ -304,15 +304,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TextButton(
-                    onPressed: () => launch('https://www.facebook.com/perpetio/'),
+                    onPressed: () => launch('https://www.facebook.com/'),
                     style: TextButton.styleFrom(shape: CircleBorder(), backgroundColor: Colors.white, elevation: 1),
                     child: Image.asset(PathConstants.facebook)),
                 TextButton(
-                    onPressed: () => launch('https://www.instagram.com/perpetio/'),
+                    onPressed: () => launch('https://www.instagram.com/'),
                     style: TextButton.styleFrom(shape: CircleBorder(), backgroundColor: Colors.white, elevation: 1),
                     child: Image.asset(PathConstants.instagram)),
                 TextButton(
-                    onPressed: () => launch('https://twitter.com/perpetio'),
+                    onPressed: () => launch('https://twitter.com/'),
                     style: TextButton.styleFrom(shape: CircleBorder(), backgroundColor: Colors.white, elevation: 1),
                     child: Image.asset(PathConstants.twitter)),
               ],

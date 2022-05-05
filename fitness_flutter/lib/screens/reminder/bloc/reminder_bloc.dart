@@ -46,8 +46,8 @@ class ReminderBloc extends Bloc<ReminderEvent, ReminderState> {
 
     await flutterNotificationsPlugin.zonedSchedule(
       1,
-      "Đã đến giờ tập rồi",
-      "Hãy bắt đầu bài tập ngay thôi nào!",
+      "Fitness",
+      "Hey, it's time to start your exercises!",
       _scheduleWeekly(dateTime, days: _createNotificationDayOfTheWeek(dayTime)),
       platformChannelSpecifics,
       uiLocalNotificationDateInterpretation:
