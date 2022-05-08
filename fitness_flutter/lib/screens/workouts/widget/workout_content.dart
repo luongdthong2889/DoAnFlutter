@@ -75,13 +75,28 @@ class _WorkoutContentState extends State<WorkoutContent> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Text(
-                  TextConstants.workouts,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              Row(
+                children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Text(
+                    TextConstants.workouts,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
                 ),
-              ),
+                const SizedBox(width: 100),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Reset progress",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: ColorConstants.primaryColor,
+                    ),
+                  ),
+                ),
+              ]),
               const SizedBox(height: 5),
               Expanded(
                 child: ListView(
