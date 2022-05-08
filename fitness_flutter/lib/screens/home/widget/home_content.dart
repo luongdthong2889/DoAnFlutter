@@ -279,7 +279,7 @@ class _HomeContentState extends State<HomeContent> {
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 3),
                 Text(
-                  '${TextConstants.profileSuccessful} ${userData.percentwo}% of workouts.',
+                  '${TextConstants.profileSuccessful} ${bloc.getProgressPercentage()}% of workouts.',
                   style: TextStyle(fontSize: 16),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,

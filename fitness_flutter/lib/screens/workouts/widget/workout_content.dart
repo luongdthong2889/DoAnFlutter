@@ -107,16 +107,16 @@ class _WorkoutContentState extends State<WorkoutContent> {
 
   fetchData(WorkoutData workoutData) {
     if (workoutData.id == "1") {
-      workoutData.currentProgress = userData.currentProgressUserWO1;
+      workoutData.currentProgress = userData.currentProgressUserWO1 ?? 0;
     }
     if (workoutData.id == "2") {
-      workoutData.currentProgress = userData.currentProgressUserWO2;
+      workoutData.currentProgress = userData.currentProgressUserWO2 ?? 0;
     }
     if (workoutData.id == "3") {
-      workoutData.currentProgress = userData.currentProgressUserWO3;
+      workoutData.currentProgress = userData.currentProgressUserWO3 ?? 0;
     }
     if (workoutData.id == "4") {
-      workoutData.currentProgress = userData.currentProgressUserWO4;
+      workoutData.currentProgress = userData.currentProgressUserWO4 ?? 0;
     }
     isLoading = true;
   }
