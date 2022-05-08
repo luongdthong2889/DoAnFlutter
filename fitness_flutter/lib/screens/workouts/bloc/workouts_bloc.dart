@@ -5,6 +5,7 @@ import 'package:fitness_flutter/core/const/data_constants.dart';
 import 'package:fitness_flutter/core/const/global_constants.dart';
 import 'package:fitness_flutter/core/service/data_service.dart';
 import 'package:fitness_flutter/data/workout_data.dart';
+import 'package:fitness_flutter/screens/home/bloc/home_bloc.dart';
 import 'package:meta/meta.dart';
 
 part 'workouts_event.dart';

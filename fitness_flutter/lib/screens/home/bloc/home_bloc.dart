@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_flutter/core/const/data_constants.dart';
 import 'package:fitness_flutter/core/service/auth_service.dart';
 import 'package:fitness_flutter/core/service/data_service.dart';
+import 'package:fitness_flutter/core/service/firebase_cloud_api.dart';
 import 'package:fitness_flutter/core/service/user_storage_service.dart';
 import 'package:fitness_flutter/data/exercise_data.dart';
+import 'package:fitness_flutter/data/user_data.dart';
 import 'package:fitness_flutter/data/workout_data.dart';
 import 'package:meta/meta.dart';
 
@@ -17,6 +21,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   List<WorkoutData> workouts = <WorkoutData>[];
   List<ExerciseData> exercises = <ExerciseData>[];
+  static final FirebaseAuth auth = FirebaseAuth.instance;
+  final userData = UserData.fromFirebase(auth.currentUser);
+  final db = FirebaseFirestore.instance;
   int timeSent = 0;
 
   @override
@@ -37,6 +44,51 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       yield ReloadImageState(photoURL: photoURL);
     }
   }
+
+  // Future getUserData() async {
+  //   var collection = FirebaseFirestore.instance.collection('users');
+  //   collection.doc(userData.id).snapshots().listen((docSnapshot) {
+  //     if (docSnapshot.exists) {
+  //       Map<String, dynamic> data = docSnapshot.data()!;
+  //       userData.currentProgressUserWO1 = data['currentProgressUserWO1'];
+  //       userData.currentProgressUserWO2 = data['currentProgressUserWO2'];
+  //       userData.currentProgressUserWO3 = data['currentProgressUserWO3'];
+  //       userData.currentProgressUserWO4 = data['currentProgressUserWO4'];
+  //       userData.workoutsfinishedWO1 = data['workoutsfinishedWO1'];
+  //       userData.workoutsfinishedWO2 = data['workoutsfinishedWO2'];
+  //       userData.workoutsfinishedWO3 = data['workoutsfinishedWO3'];
+  //       userData.workoutsfinishedWO4 = data['workoutsfinishedWO4'];
+  //       print('?????????????????????????????????????');
+  //       finish = [
+  //         userData.workoutsfinishedWO1,
+  //         userData.workoutsfinishedWO2,
+  //         userData.workoutsfinishedWO3,
+  //         userData.workoutsfinishedWO4,
+  //       ];
+  //       print(finish);
+  //       count = finish.where((element) => element == 1).length;
+  //       print(count);
+  //       if (userData.currentProgressUserWO1 < 3 &&
+  //           userData.currentProgressUserWO1 >= 1) {
+  //         countinprogress += 1;
+  //       }
+  //       if (userData.currentProgressUserWO2 < 3 &&
+  //           userData.currentProgressUserWO2 >= 1) {
+  //         countinprogress += 1;
+  //       }
+  //       if (userData.currentProgressUserWO3 < 3 &&
+  //           userData.currentProgressUserWO3 >= 1) {
+  //         countinprogress += 1;
+  //       }
+  //       if (userData.currentProgressUserWO4 < 3 &&
+  //           userData.currentProgressUserWO4 >= 1) {
+  //         countinprogress += 1;
+  //       }
+  //       print(countinprogress);
+  //     }
+  //   });
+  // }
+
 
   int getProgressPercentage() {
     final completed = workouts

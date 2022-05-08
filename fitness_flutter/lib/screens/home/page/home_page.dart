@@ -1,13 +1,21 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_flutter/core/service/firebase_cloud_api.dart';
+import 'package:fitness_flutter/data/user_data.dart';
 import 'package:fitness_flutter/screens/home/bloc/home_bloc.dart';
 import 'package:fitness_flutter/screens/home/widget/home_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
-
+  HomePage({Key? key}) : super(key: key);
+  
+  static final FirebaseAuth auth = FirebaseAuth.instance;
+  final userData = UserData.fromFirebase(auth.currentUser);
+  final db = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
+    getDoc();
     return Scaffold(
       body: _buildContext(context),
     );
@@ -31,5 +39,26 @@ class HomePage extends StatelessWidget {
         listener: (context, state) {},
       ),
     );
+  }
+
+  Future getDoc() async {
+    var a = await db.collection('users').doc(userData.id).get();
+    if(!a.exists){
+      pustUserDataInit();
+    }
+  }
+
+  pustUserDataInit(){
+    userData.currentProgressUserWO1 = 0;
+    userData.currentProgressUserWO2 = 0;
+    userData.currentProgressUserWO3 = 0;
+    userData.currentProgressUserWO4 = 0;
+    userData.workoutsfinishedWO1 = 0;
+    userData.workoutsfinishedWO2 = 0;
+    userData.workoutsfinishedWO3 = 0;
+    userData.workoutsfinishedWO4 = 0;
+    userData.time = 0;
+    userData.percentwo = 0;
+    FirebaseApi.createUserData(userData);
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:fitness_flutter/data/workout_data.dart';
 import 'package:meta/meta.dart';
 
 part 'start_workout_event.dart';
@@ -8,7 +9,6 @@ part 'start_workout_state.dart';
 
 class StartWorkoutBloc extends Bloc<StartWorkoutEvent, StartWorkoutState> {
   StartWorkoutBloc() : super(StartWorkoutInitial());
-
   int time = 0;
 
   @override
@@ -25,4 +25,5 @@ class StartWorkoutBloc extends Bloc<StartWorkoutEvent, StartWorkoutState> {
       yield PauseTimerState(currentTime: time);
     }
   }
+
 }

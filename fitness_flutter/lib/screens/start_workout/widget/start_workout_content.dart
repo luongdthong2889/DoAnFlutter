@@ -1,14 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_flutter/core/const/color_constants.dart';
+import 'package:fitness_flutter/core/const/data_constants.dart';
 import 'package:fitness_flutter/core/const/path_constants.dart';
 import 'package:fitness_flutter/core/const/text_constants.dart';
 import 'package:fitness_flutter/core/service/data_service.dart';
+import 'package:fitness_flutter/core/service/firebase_cloud_api.dart';
 import 'package:fitness_flutter/data/exercise_data.dart';
+import 'package:fitness_flutter/data/user_data.dart';
 import 'package:fitness_flutter/data/workout_data.dart';
 import 'package:fitness_flutter/screens/common_widgets/fitness_button.dart';
 import 'package:fitness_flutter/screens/start_workout/bloc/start_workout_bloc.dart';
 import 'package:fitness_flutter/screens/start_workout/page/start_workout_page.dart';
 import 'package:fitness_flutter/screens/start_workout/widget/start_workout_video.dart';
-import 'package:fitness_flutter/screens/workout_details_screen/bloc/workout_details_bloc.dart' as workout_bloc;
+import 'package:fitness_flutter/screens/workout_details_screen/bloc/workout_details_bloc.dart'
+    as workout_bloc;
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,6 +29,14 @@ class StartWorkoutContent extends StatelessWidget {
     required this.exercise,
     required this.nextExercise,
   });
+  static final FirebaseAuth auth = FirebaseAuth.instance;
+  final userData = UserData.fromFirebase(auth.currentUser);
+  List<WorkoutData> wo = DataConstants.workouts.toList();
+
+  static int timeSent = 0;
+  static int percent = 0;
+  List<WorkoutData> workouts = <WorkoutData>[];
+  List<ExerciseData> exercises = <ExerciseData>[];
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +74,7 @@ class StartWorkoutContent extends StatelessWidget {
       ),
     );
   }
+
   Widget _createBackButton(BuildContext context) {
     final bloc = BlocProvider.of<StartWorkoutBloc>(context);
     return Padding(
@@ -85,6 +100,7 @@ class StartWorkoutContent extends StatelessWidget {
       ),
     );
   }
+
   Widget _createVideo(BuildContext context) {
     final bloc = BlocProvider.of<StartWorkoutBloc>(context);
     return Container(
@@ -103,6 +119,7 @@ class StartWorkoutContent extends StatelessWidget {
       ),
     );
   }
+
   Widget _createTitle() {
     return Text(exercise.title ?? "",
         style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold));
@@ -112,7 +129,8 @@ class StartWorkoutContent extends StatelessWidget {
     return Text(exercise.description ?? "",
         style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500));
   }
-   Widget _createSteps() {
+
+  Widget _createSteps() {
     return Column(
       children: [
         for (int i = 0; i < exercise.steps!.length; i++) ...[
@@ -122,6 +140,7 @@ class StartWorkoutContent extends StatelessWidget {
       ],
     );
   }
+
   Widget _createTimeTracker(BuildContext context) {
     return Container(
       width: double.infinity,
@@ -172,17 +191,218 @@ class StartWorkoutContent extends StatelessWidget {
       ),
     );
   }
-   Widget _createButton(BuildContext context) {
+
+  Widget _createButton(BuildContext context) {
     final bloc = BlocProvider.of<workout_bloc.WorkoutDetailsBloc>(context);
     return FitnessButton(
       title: nextExercise != null ? TextConstants.next : TextConstants.finished,
       onTap: () async {
+        print(exercise.id.toString() + 'okayyyyyyyyyyyyyyyyyyyyyyyyyyyyy');
+        print(workout.id.toString() +
+            'okayyyyyyyyyyyyyyyyyyyyyyyyyyyyy6666666666666');
+        if (nextExercise == null) {
+          if (workout.id == "1") {
+            List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
+            int currentExerciseIndex = exercisesList!.indexOf(exercise);
+            userData.currentProgressUserWO1 = currentExerciseIndex + 1;
+            userData.workoutsfinishedWO1 = 1;
+            if (exercise.id == "1.3") {
+              timeSent = timeSent + exercise.minutes!.toInt();
+              userData.time = timeSent;
+            }
+
+            userData.percentwo = getProcessPercent();
+            // print(userData.percentwo);
+            // wo.forEach((element) {
+
+
+            //   print(element.currentProgress);
+            // });
+            // print(timeSent);
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(userData.id)
+                .update({
+              'currentProgressUserWO1': currentExerciseIndex + 1,
+              'workoutsfinishedWO1': userData.workoutsfinishedWO1,
+              'time': userData.time,
+              'percentwo' : userData.percentwo,
+            });
+          }
+          if (workout.id == "2") {
+            List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
+            int currentExerciseIndex = exercisesList!.indexOf(exercise);
+            userData.currentProgressUserWO2 = currentExerciseIndex + 1;
+            userData.workoutsfinishedWO2 = 1;
+            if (exercise.id == "2.3") {
+              timeSent = timeSent + exercise.minutes!.toInt();
+              userData.time = timeSent;
+            }
+            userData.percentwo = getProcessPercent();
+
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(userData.id)
+                .update({
+              'currentProgressUserWO2': currentExerciseIndex + 1,
+              'workoutsfinishedWO2': userData.workoutsfinishedWO2,
+              'time': userData.time,
+              'percentwo' : userData.percentwo,
+            });
+          }
+          if (workout.id == "3") {
+            List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
+            int currentExerciseIndex = exercisesList!.indexOf(exercise);
+            userData.currentProgressUserWO3 = currentExerciseIndex + 1;
+            userData.workoutsfinishedWO3 = 1;
+            if (exercise.id == "3.3") {
+              timeSent = timeSent + exercise.minutes!.toInt();
+              userData.time = timeSent;
+            }
+            userData.percentwo = getProcessPercent();
+
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(userData.id)
+                .update({
+              'currentProgressUserWO3': currentExerciseIndex + 1,
+              'workoutsfinishedWO3': userData.workoutsfinishedWO3,
+              'time': userData.time,
+              'percentwo' : userData.percentwo,
+            
+            });
+          }
+          if (workout.id == "4") {
+            List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
+            int currentExerciseIndex = exercisesList!.indexOf(exercise);
+            userData.currentProgressUserWO4 = currentExerciseIndex + 1;
+            userData.workoutsfinishedWO4 = 1;
+            if (exercise.id == "4.3") {
+              timeSent = timeSent + exercise.minutes!.toInt();
+              userData.time = timeSent;
+            }
+            userData.percentwo = getProcessPercent();
+
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(userData.id)
+                .update({
+              'currentProgressUserWO4': currentExerciseIndex + 1,
+              'workoutsfinishedWO4': userData.workoutsfinishedWO4,
+              'time': userData.time,
+              'percentwo' : userData.percentwo,
+
+            });
+          }
+        }
         if (nextExercise != null) {
           List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
           int currentExerciseIndex = exercisesList!.indexOf(exercise);
-
+          print(currentExerciseIndex.toString() +
+              'okayyyyyyyyyyyyyyyyyyyyyyyyyyyyy2222222222222222222222222222');
           await _saveWorkout(currentExerciseIndex);
 
+          if (workout.id == "1") {
+            List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
+            int currentExerciseIndex = exercisesList!.indexOf(exercise);
+            userData.currentProgressUserWO1 = currentExerciseIndex + 1;
+            if (userData.currentProgressUserWO1 < 3 &&
+                userData.currentProgressUserWO1 > 0) {
+              userData.workoutsfinishedWO1 = 0;
+            }
+            if (exercise.id == "1.1") {
+              timeSent = timeSent + exercise.minutes!.toInt();
+              userData.time = timeSent;
+            }
+            if (exercise.id == "1.2") {
+              timeSent = timeSent + exercise.minutes!.toInt();
+              userData.time = timeSent;
+            }
+            // print(timeSent);
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(userData.id)
+                .update({
+              'currentProgressUserWO1': currentExerciseIndex + 1,
+              'workoutsfinishedWO1': userData.workoutsfinishedWO1,
+              'time': userData.time,
+            });
+          }
+          if (workout.id == "2") {
+            List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
+            int currentExerciseIndex = exercisesList!.indexOf(exercise);
+            userData.currentProgressUserWO2 = currentExerciseIndex + 1;
+            if (userData.currentProgressUserWO2 < 3 &&
+                userData.currentProgressUserWO2 > 0) {
+              userData.workoutsfinishedWO2 = 0;
+            }
+            if (exercise.id == "2.1") {
+              timeSent = timeSent + exercise.minutes!.toInt();
+              userData.time = timeSent;
+            }
+            if (exercise.id == "2.2") {
+              timeSent = timeSent + exercise.minutes!.toInt();
+              userData.time = timeSent;
+            }
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(userData.id)
+                .update({
+              'currentProgressUserWO2': currentExerciseIndex + 1,
+              'workoutsfinishedWO2': userData.workoutsfinishedWO2,
+              'time': userData.time,
+            });
+          }
+          if (workout.id == "3") {
+            List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
+            int currentExerciseIndex = exercisesList!.indexOf(exercise);
+            userData.currentProgressUserWO3 = currentExerciseIndex + 1;
+            if (userData.currentProgressUserWO3 < 3 &&
+                userData.currentProgressUserWO3 > 0) {
+              userData.workoutsfinishedWO3 = 0;
+            }
+            if (exercise.id == "3.1") {
+              userData.time = timeSent;
+              timeSent = timeSent + exercise.minutes!.toInt();
+            }
+            if (exercise.id == "3.2") {
+              userData.time = timeSent;
+              timeSent = timeSent + exercise.minutes!.toInt();
+            }
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(userData.id)
+                .update({
+              'currentProgressUserWO3': currentExerciseIndex + 1,
+              'workoutsfinishedWO3': userData.workoutsfinishedWO3,
+              'time': userData.time,
+            });
+          }
+          if (workout.id == "4") {
+            List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
+            int currentExerciseIndex = exercisesList!.indexOf(exercise);
+            userData.currentProgressUserWO4 = currentExerciseIndex + 1;
+            if (userData.currentProgressUserWO4 < 3 &&
+                userData.currentProgressUserWO4 > 0) {
+              userData.workoutsfinishedWO4 = 0;
+            }
+            if (exercise.id == "4.1") {
+              userData.time = timeSent;
+              timeSent = timeSent + exercise.minutes!.toInt();
+            }
+            if (exercise.id == "4.2") {
+              userData.time = timeSent;
+              timeSent = timeSent + exercise.minutes!.toInt();
+            }
+            FirebaseFirestore.instance
+                .collection('users')
+                .doc(userData.id)
+                .update({
+              'currentProgressUserWO4': currentExerciseIndex + 1,
+              'workoutsfinishedWO4': userData.workoutsfinishedWO4,
+              'time': userData.time,
+            });
+          }
           if (currentExerciseIndex < exercisesList.length - 1) {
             bloc.add(workout_bloc.StartTappedEvent(
               workout: workout,
@@ -199,6 +419,17 @@ class StartWorkoutContent extends StatelessWidget {
     );
   }
 
+  int getProcessPercent() {
+    final completed = wo
+        .where((w) =>
+            (w.currentProgress ?? 0) > 0 && w.currentProgress == w.progress)
+        .toList();
+    final percent01 =
+        completed.length.toDouble() / DataConstants.workouts.length.toDouble();
+    percent = (percent01 * 100).toInt();
+    return percent;
+  }
+
   Future<void> _saveWorkout(int exerciseIndex) async {
     if (workout.currentProgress! < exerciseIndex + 1) {
       workout.currentProgress = exerciseIndex + 1;
@@ -208,6 +439,7 @@ class StartWorkoutContent extends StatelessWidget {
     await DataService.saveWorkout(workout);
   }
 }
+
 class Step extends StatelessWidget {
   final String number;
   final String description;
@@ -240,5 +472,4 @@ class Step extends StatelessWidget {
       ],
     );
   }
-  
 }

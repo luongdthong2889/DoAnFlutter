@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_flutter/core/const/color_constants.dart';
 import 'package:fitness_flutter/core/const/data_constants.dart';
 import 'package:fitness_flutter/core/const/path_constants.dart';
 import 'package:fitness_flutter/core/const/text_constants.dart';
+import 'package:fitness_flutter/data/user_data.dart';
 import 'package:fitness_flutter/data/workout_data.dart';
 import 'package:fitness_flutter/screens/common_widgets/fitness_button.dart';
 import 'package:fitness_flutter/screens/edit_account/edit_account_screen.dart';
@@ -15,13 +17,38 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'home_exercises_card.dart';
 
-class HomeContent extends StatelessWidget {
+class HomeContent extends StatefulWidget {
   final List<WorkoutData> workouts;
 
-  const HomeContent({
+  HomeContent({
     required this.workouts,
     Key? key,
   }) : super(key: key);
+
+  static final FirebaseAuth auth = FirebaseAuth.instance;
+
+  @override
+  State<HomeContent> createState() => _HomeContentState();
+}
+
+class _HomeContentState extends State<HomeContent> {
+
+    @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+  
+  final userData = UserData.fromFirebase(HomeContent.auth.currentUser);
+  final db = FirebaseFirestore.instance;
+
+  Future getData() async {
+    var docsnapshot = await db.collection("users").doc(userData.id).get();
+    if (docsnapshot.exists) {
+      Map<String, dynamic> data = docsnapshot.data()!;
+      userData.percentwo = data['percentwo'];
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +77,10 @@ class HomeContent extends StatelessWidget {
       ),
     );
   }
+
   Widget _createProfileData(BuildContext context) {
     final User? user = FirebaseAuth.instance.currentUser;
-    
-    final photoURL = user?.photoURL ?? null;
+    final displayName = user?.displayName ?? "No Username";
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
@@ -62,17 +89,12 @@ class HomeContent extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BlocBuilder<HomeBloc, HomeState>(
-                builder: (context, state) {
-                  final displayName = user?.displayName ?? "No Username";
-                  return Text(
-                    'Hi, $displayName',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  );
-                },
+              Text(
+                'Hi, $displayName',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 2),
               Text(
@@ -87,10 +109,10 @@ class HomeContent extends StatelessWidget {
           BlocBuilder<HomeBloc, HomeState>(
             buildWhen: (_, currState) => currState is ReloadImageState,
             builder: (context, state) {
-              final photoURL =
-                  state is ReloadImageState ? state.photoURL : null;
+              final photoUrl =
+                  FirebaseAuth.instance.currentUser?.photoURL ?? null;
               return GestureDetector(
-                child: photoURL == null
+                child: photoUrl == null
                     ? CircleAvatar(
                         backgroundImage: AssetImage(PathConstants.profile),
                         radius: 25)
@@ -98,7 +120,7 @@ class HomeContent extends StatelessWidget {
                         child: ClipOval(
                             child: FadeInImage.assetNetwork(
                                 placeholder: PathConstants.profile,
-                                image: photoURL,
+                                image: photoUrl,
                                 fit: BoxFit.cover,
                                 width: 200,
                                 height: 120)),
@@ -115,11 +137,13 @@ class HomeContent extends StatelessWidget {
       ),
     );
   }
+
   Widget _showStartWorkout(BuildContext context, HomeBloc bloc) {
-    return workouts.isEmpty
+    return widget.workouts.isEmpty
         ? _createStartWorkout(context, bloc)
         : HomeStatistics();
   }
+
   Widget _createStartWorkout(BuildContext context, HomeBloc bloc) {
     final blocTabBar = BlocProvider.of<TabBarBloc>(context);
     return Container(
@@ -173,6 +197,7 @@ class HomeContent extends StatelessWidget {
       ),
     );
   }
+
   Widget _createExercisesList(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,9 +245,11 @@ class HomeContent extends StatelessWidget {
       ],
     );
   }
+
   Widget _showProgress(HomeBloc bloc) {
-    return workouts.isNotEmpty ? _createProgress(bloc) : Container();
+    return widget.workouts.isNotEmpty ? _createProgress(bloc) : Container();
   }
+
   Widget _createProgress(HomeBloc bloc) {
     return Container(
       width: double.infinity,
@@ -252,7 +279,7 @@ class HomeContent extends StatelessWidget {
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 3),
                 Text(
-                  '${TextConstants.profileSuccessful} ${bloc.getProgressPercentage()}% of workouts.',
+                  '${TextConstants.profileSuccessful} ${userData.percentwo}% of workouts.',
                   style: TextStyle(fontSize: 16),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,

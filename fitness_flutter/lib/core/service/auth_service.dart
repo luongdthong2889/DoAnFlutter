@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness_flutter/core/const/global_constants.dart';
 import 'package:fitness_flutter/core/extensions/exceptions.dart';
+import 'package:fitness_flutter/core/service/firebase_cloud_api.dart';
 import 'package:fitness_flutter/core/service/user_storage_service.dart';
 import 'package:fitness_flutter/data/user_data.dart';
 

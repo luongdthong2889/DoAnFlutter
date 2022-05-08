@@ -1,3 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_flutter/core/service/firebase_cloud_api.dart';
+import 'package:fitness_flutter/data/user_data.dart';
 import 'package:fitness_flutter/screens/forgot_password/page/forgot_password_page.dart';
 import 'package:fitness_flutter/screens/sign_in/bloc/sign_in_bloc.dart';
 import 'package:fitness_flutter/screens/sign_in/widget/sign_in_content.dart';
@@ -7,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({Key? key}) : super(key: key);
-
+  SignInPage({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
