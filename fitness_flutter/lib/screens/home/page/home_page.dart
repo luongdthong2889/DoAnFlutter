@@ -49,16 +49,16 @@ class HomePage extends StatelessWidget {
   }
 
   pustUserDataInit(){
-    userData.currentProgressUserWO1 = 0;
-    userData.currentProgressUserWO2 = 0;
-    userData.currentProgressUserWO3 = 0;
-    userData.currentProgressUserWO4 = 0;
-    userData.workoutsfinishedWO1 = 0;
-    userData.workoutsfinishedWO2 = 0;
-    userData.workoutsfinishedWO3 = 0;
-    userData.workoutsfinishedWO4 = 0;
+    userData.progressWorkout01 = 0;
+    userData.progressWorkout02 = 0;
+    userData.progressWorkout03 = 0;
+    userData.progressWorkout04 = 0;
+    userData.finishedWorkout01 = 0;
+    userData.finishedWorkout02 = 0;
+    userData.finishedWorkout03 = 0;
+    userData.finishedWorkout04 = 0;
     userData.time = 0;
-    userData.percentwo = 0;
+    userData.percentProgressWorkout = 0;
     FirebaseApi.createUserData(userData);
   }
 }

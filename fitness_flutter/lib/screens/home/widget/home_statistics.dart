@@ -34,28 +34,28 @@ class _HomeStatisticsState extends State<HomeStatistics> {
     var docsnapshot = await db.collection("users").doc(userData.id).get();
     if (docsnapshot.exists) {
       Map<String, dynamic> data = docsnapshot.data()!;
-      userData.workoutsfinishedWO1 = data['workoutsfinishedWO1'];
-      userData.workoutsfinishedWO2 = data['workoutsfinishedWO2'];
-      userData.workoutsfinishedWO3 = data['workoutsfinishedWO3'];
-      userData.workoutsfinishedWO4 = data['workoutsfinishedWO4'];
-      userData.currentProgressUserWO1 = data['currentProgressUserWO1'];
-      userData.currentProgressUserWO2 = data['currentProgressUserWO2'];
-      userData.currentProgressUserWO3 = data['currentProgressUserWO3'];
-      userData.currentProgressUserWO4 = data['currentProgressUserWO4'];
+      userData.finishedWorkout01 = data['finishedWorkout01'];
+      userData.finishedWorkout02 = data['finishedWorkout02'];
+      userData.finishedWorkout03 = data['finishedWorkout03'];
+      userData.finishedWorkout04 = data['finishedWorkout04'];
+      userData.progressWorkout01 = data['progressWorkout01'];
+      userData.progressWorkout02 = data['progressWorkout02'];
+      userData.progressWorkout03 = data['progressWorkout03'];
+      userData.progressWorkout04 = data['progressWorkout04'];
       userData.time = data['time'];
-      userData.percentwo = data['percentwo'];
+      userData.percentProgressWorkout = data['percentProgressWorkout'];
     }
     finish = [
-      userData.workoutsfinishedWO1,
-      userData.workoutsfinishedWO2,
-      userData.workoutsfinishedWO3,
-      userData.workoutsfinishedWO4,
+      userData.finishedWorkout01,
+      userData.finishedWorkout02,
+      userData.finishedWorkout03,
+      userData.finishedWorkout04,
     ];
     inprogress = [
-      userData.currentProgressUserWO1,
-      userData.currentProgressUserWO2,
-      userData.currentProgressUserWO3,
-      userData.currentProgressUserWO4,
+      userData.progressWorkout01,
+      userData.progressWorkout02,
+      userData.progressWorkout03,
+      userData.progressWorkout04,
     ];
     timesent = userData.time ?? 0; 
     print(inprogress);

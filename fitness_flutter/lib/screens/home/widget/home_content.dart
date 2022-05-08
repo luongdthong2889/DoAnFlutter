@@ -46,7 +46,7 @@ class _HomeContentState extends State<HomeContent> {
     var docsnapshot = await db.collection("users").doc(userData.id).get();
     if (docsnapshot.exists) {
       Map<String, dynamic> data = docsnapshot.data()!;
-      userData.percentwo = data['percentwo'];
+      userData.percentProgressWorkout = data['percentProgressWorkout'];
     }
   }
 

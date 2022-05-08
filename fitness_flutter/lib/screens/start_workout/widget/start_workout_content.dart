@@ -59,44 +59,44 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
     var docsnapshot = await db.collection("users").doc(userData.id).get();
     if (docsnapshot.exists) {
       Map<String, dynamic> data = docsnapshot.data()!;
-      userData.workoutsfinishedWO1 = data['workoutsfinishedWO1'];
-      userData.workoutsfinishedWO2 = data['workoutsfinishedWO2'];
-      userData.workoutsfinishedWO3 = data['workoutsfinishedWO3'];
-      userData.workoutsfinishedWO4 = data['workoutsfinishedWO4'];
-      userData.currentProgressUserWO1 = data['currentProgressUserWO1'];
-      userData.currentProgressUserWO2 = data['currentProgressUserWO2'];
-      userData.currentProgressUserWO3 = data['currentProgressUserWO3'];
-      userData.currentProgressUserWO4 = data['currentProgressUserWO4'];
+      userData.finishedWorkout01 = data['finishedWorkout01'];
+      userData.finishedWorkout02 = data['finishedWorkout02'];
+      userData.finishedWorkout03 = data['finishedWorkout03'];
+      userData.finishedWorkout04 = data['finishedWorkout04'];
+      userData.progressWorkout01 = data['progressWorkout01'];
+      userData.progressWorkout02 = data['progressWorkout02'];
+      userData.progressWorkout03 = data['progressWorkout03'];
+      userData.progressWorkout04 = data['progressWorkout04'];
       userData.time = data['time'];
-      userData.percentwo = data['percentwo'];
+      userData.percentProgressWorkout = data['percentProgressWorkout'];
     }
     inprogress = [
-      userData.currentProgressUserWO1,
-      userData.currentProgressUserWO2,
-      userData.currentProgressUserWO3,
-      userData.currentProgressUserWO4,
+      userData.progressWorkout01,
+      userData.progressWorkout02,
+      userData.progressWorkout03,
+      userData.progressWorkout04,
     ];
     print(inprogress);
     if (inprogress.where((element) => element < 3 && element > 0).length == 1) {
-      userData.percentwo = 25;
+      userData.percentProgressWorkout = 25;
       percent = 25;
     } else if (inprogress
             .where((element) => element < 3 && element > 0)
             .length ==
         2) {
-      userData.percentwo = 50;
+      userData.percentProgressWorkout = 50;
       percent = 50;
     } else if (inprogress
             .where((element) => element < 3 && element > 0)
             .length ==
         3) {
-      userData.percentwo = 75;
+      userData.percentProgressWorkout = 75;
       percent = 75;
     } else if (inprogress
             .where((element) => element < 3 && element > 0)
             .length ==
         4) {
-      userData.percentwo = 100;
+      userData.percentProgressWorkout = 100;
       percent = 100;
     }
   }
@@ -270,13 +270,13 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
           if (widget.workout.id == "1") {
             List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
             int currentExerciseIndex = exercisesList!.indexOf(widget.exercise);
-            userData.currentProgressUserWO1 = currentExerciseIndex + 1;
-            userData.workoutsfinishedWO1 = 1;
+            userData.progressWorkout01 = currentExerciseIndex + 1;
+            userData.finishedWorkout01 = 1;
             if (widget.exercise.id == "1.3") {
               timeSent = timeSent + widget.exercise.minutes!.toInt();
               userData.time = timeSent;
             }
-            // print(userData.percentwo);
+            // print(userData.percentProgressWorkout);
             // wo.forEach((element) {
 
             //   print(element.currentProgress);
@@ -286,17 +286,17 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
                 .collection('users')
                 .doc(userData.id)
                 .update({
-              'currentProgressUserWO1': currentExerciseIndex + 1,
-              'workoutsfinishedWO1': userData.workoutsfinishedWO1,
+              'progressWorkout01': currentExerciseIndex + 1,
+              'finishedWorkout01': userData.finishedWorkout01,
               'time': userData.time,
-              'percentwo': percent,
+              'percentProgressWorkout': percent,
             });
           }
           if (widget.workout.id == "2") {
             List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
             int currentExerciseIndex = exercisesList!.indexOf(widget.exercise);
-            userData.currentProgressUserWO2 = currentExerciseIndex + 1;
-            userData.workoutsfinishedWO2 = 1;
+            userData.progressWorkout02 = currentExerciseIndex + 1;
+            userData.finishedWorkout02 = 1;
             if (widget.exercise.id == "2.3") {
               timeSent = timeSent + widget.exercise.minutes!.toInt();
               userData.time = timeSent;
@@ -305,17 +305,17 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
                 .collection('users')
                 .doc(userData.id)
                 .update({
-              'currentProgressUserWO2': currentExerciseIndex + 1,
-              'workoutsfinishedWO2': userData.workoutsfinishedWO2,
+              'progressWorkout02': currentExerciseIndex + 1,
+              'finishedWorkout02': userData.finishedWorkout02,
               'time': userData.time,
-              'percentwo': percent,
+              'percentProgressWorkout': percent,
             });
           }
           if (widget.workout.id == "3") {
             List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
             int currentExerciseIndex = exercisesList!.indexOf(widget.exercise);
-            userData.currentProgressUserWO3 = currentExerciseIndex + 1;
-            userData.workoutsfinishedWO3 = 1;
+            userData.progressWorkout03 = currentExerciseIndex + 1;
+            userData.finishedWorkout03 = 1;
             if (widget.exercise.id == "3.3") {
               timeSent = timeSent + widget.exercise.minutes!.toInt();
               userData.time = timeSent;
@@ -324,17 +324,17 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
                 .collection('users')
                 .doc(userData.id)
                 .update({
-              'currentProgressUserWO3': currentExerciseIndex + 1,
-              'workoutsfinishedWO3': userData.workoutsfinishedWO3,
+              'progressWorkout03': currentExerciseIndex + 1,
+              'finishedWorkout03': userData.finishedWorkout03,
               'time': userData.time,
-              'percentwo': percent,
+              'percentProgressWorkout': percent,
             });
           }
           if (widget.workout.id == "4") {
             List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
             int currentExerciseIndex = exercisesList!.indexOf(widget.exercise);
-            userData.currentProgressUserWO4 = currentExerciseIndex + 1;
-            userData.workoutsfinishedWO4 = 1;
+            userData.progressWorkout04 = currentExerciseIndex + 1;
+            userData.finishedWorkout04 = 1;
             if (widget.exercise.id == "4.3") {
               timeSent = timeSent + widget.exercise.minutes!.toInt();
               userData.time = timeSent;
@@ -343,10 +343,10 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
                 .collection('users')
                 .doc(userData.id)
                 .update({
-              'currentProgressUserWO4': currentExerciseIndex + 1,
-              'workoutsfinishedWO4': userData.workoutsfinishedWO4,
+              'progressWorkout04': currentExerciseIndex + 1,
+              'finishedWorkout04': userData.finishedWorkout04,
               'time': userData.time,
-              'percentwo': percent,
+              'percentProgressWorkout': percent,
             });
           }
         }
@@ -360,10 +360,10 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
           if (widget.workout.id == "1") {
             List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
             int currentExerciseIndex = exercisesList!.indexOf(widget.exercise);
-            userData.currentProgressUserWO1 = currentExerciseIndex + 1;
-            if (userData.currentProgressUserWO1 < 3 &&
-                userData.currentProgressUserWO1 > 0) {
-              userData.workoutsfinishedWO1 = 0;
+            userData.progressWorkout01 = currentExerciseIndex + 1;
+            if (userData.progressWorkout01 < 3 &&
+                userData.progressWorkout01 > 0) {
+              userData.finishedWorkout01 = 0;
             }
             if (widget.exercise.id == "1.1") {
               timeSent = timeSent + widget.exercise.minutes!.toInt();
@@ -378,18 +378,18 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
                 .collection('users')
                 .doc(userData.id)
                 .update({
-              'currentProgressUserWO1': currentExerciseIndex + 1,
-              'workoutsfinishedWO1': userData.workoutsfinishedWO1,
+              'progressWorkout01': currentExerciseIndex + 1,
+              'finishedWorkout01': userData.finishedWorkout01,
               'time': userData.time,
             });
           }
           if (widget.workout.id == "2") {
             List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
             int currentExerciseIndex = exercisesList!.indexOf(widget.exercise);
-            userData.currentProgressUserWO2 = currentExerciseIndex + 1;
-            if (userData.currentProgressUserWO2 < 3 &&
-                userData.currentProgressUserWO2 > 0) {
-              userData.workoutsfinishedWO2 = 0;
+            userData.progressWorkout02 = currentExerciseIndex + 1;
+            if (userData.progressWorkout02 < 3 &&
+                userData.progressWorkout02 > 0) {
+              userData.finishedWorkout02 = 0;
             }
             if (widget.exercise.id == "2.1") {
               timeSent = timeSent + widget.exercise.minutes!.toInt();
@@ -403,18 +403,18 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
                 .collection('users')
                 .doc(userData.id)
                 .update({
-              'currentProgressUserWO2': currentExerciseIndex + 1,
-              'workoutsfinishedWO2': userData.workoutsfinishedWO2,
+              'progressWorkout02': currentExerciseIndex + 1,
+              'finishedWorkout02': userData.finishedWorkout02,
               'time': userData.time,
             });
           }
           if (widget.workout.id == "3") {
             List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
             int currentExerciseIndex = exercisesList!.indexOf(widget.exercise);
-            userData.currentProgressUserWO3 = currentExerciseIndex + 1;
-            if (userData.currentProgressUserWO3 < 3 &&
-                userData.currentProgressUserWO3 > 0) {
-              userData.workoutsfinishedWO3 = 0;
+            userData.progressWorkout03 = currentExerciseIndex + 1;
+            if (userData.progressWorkout03 < 3 &&
+                userData.progressWorkout03 > 0) {
+              userData.finishedWorkout03 = 0;
             }
             if (widget.exercise.id == "3.1") {
               userData.time = timeSent;
@@ -428,18 +428,18 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
                 .collection('users')
                 .doc(userData.id)
                 .update({
-              'currentProgressUserWO3': currentExerciseIndex + 1,
-              'workoutsfinishedWO3': userData.workoutsfinishedWO3,
+              'progressWorkout03': currentExerciseIndex + 1,
+              'finishedWorkout03': userData.finishedWorkout03,
               'time': userData.time,
             });
           }
           if (widget.workout.id == "4") {
             List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
             int currentExerciseIndex = exercisesList!.indexOf(widget.exercise);
-            userData.currentProgressUserWO4 = currentExerciseIndex + 1;
-            if (userData.currentProgressUserWO4 < 3 &&
-                userData.currentProgressUserWO4 > 0) {
-              userData.workoutsfinishedWO4 = 0;
+            userData.progressWorkout04 = currentExerciseIndex + 1;
+            if (userData.progressWorkout04 < 3 &&
+                userData.progressWorkout04 > 0) {
+              userData.finishedWorkout04 = 0;
             }
             if (widget.exercise.id == "4.1") {
               userData.time = timeSent;
@@ -453,8 +453,8 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
                 .collection('users')
                 .doc(userData.id)
                 .update({
-              'currentProgressUserWO4': currentExerciseIndex + 1,
-              'workoutsfinishedWO4': userData.workoutsfinishedWO4,
+              'progressWorkout04': currentExerciseIndex + 1,
+              'finishedWorkout04': userData.finishedWorkout04,
               'time': userData.time,
             });
           }

@@ -50,38 +50,38 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   //   collection.doc(userData.id).snapshots().listen((docSnapshot) {
   //     if (docSnapshot.exists) {
   //       Map<String, dynamic> data = docSnapshot.data()!;
-  //       userData.currentProgressUserWO1 = data['currentProgressUserWO1'];
-  //       userData.currentProgressUserWO2 = data['currentProgressUserWO2'];
-  //       userData.currentProgressUserWO3 = data['currentProgressUserWO3'];
-  //       userData.currentProgressUserWO4 = data['currentProgressUserWO4'];
-  //       userData.workoutsfinishedWO1 = data['workoutsfinishedWO1'];
-  //       userData.workoutsfinishedWO2 = data['workoutsfinishedWO2'];
-  //       userData.workoutsfinishedWO3 = data['workoutsfinishedWO3'];
-  //       userData.workoutsfinishedWO4 = data['workoutsfinishedWO4'];
+  //       userData.progressWorkout01 = data['progressWorkout01'];
+  //       userData.progressWorkout02 = data['progressWorkout02'];
+  //       userData.progressWorkout03 = data['progressWorkout03'];
+  //       userData.progressWorkout04 = data['progressWorkout04'];
+  //       userData.finishedWorkout01 = data['finishedWorkout01'];
+  //       userData.finishedWorkout02 = data['finishedWorkout02'];
+  //       userData.finishedWorkout03 = data['finishedWorkout03'];
+  //       userData.finishedWorkout04 = data['finishedWorkout04'];
   //       print('?????????????????????????????????????');
   //       finish = [
-  //         userData.workoutsfinishedWO1,
-  //         userData.workoutsfinishedWO2,
-  //         userData.workoutsfinishedWO3,
-  //         userData.workoutsfinishedWO4,
+  //         userData.finishedWorkout01,
+  //         userData.finishedWorkout02,
+  //         userData.finishedWorkout03,
+  //         userData.finishedWorkout04,
   //       ];
   //       print(finish);
   //       count = finish.where((element) => element == 1).length;
   //       print(count);
-  //       if (userData.currentProgressUserWO1 < 3 &&
-  //           userData.currentProgressUserWO1 >= 1) {
+  //       if (userData.progressWorkout01 < 3 &&
+  //           userData.progressWorkout01 >= 1) {
   //         countinprogress += 1;
   //       }
-  //       if (userData.currentProgressUserWO2 < 3 &&
-  //           userData.currentProgressUserWO2 >= 1) {
+  //       if (userData.progressWorkout02 < 3 &&
+  //           userData.progressWorkout02 >= 1) {
   //         countinprogress += 1;
   //       }
-  //       if (userData.currentProgressUserWO3 < 3 &&
-  //           userData.currentProgressUserWO3 >= 1) {
+  //       if (userData.progressWorkout03 < 3 &&
+  //           userData.progressWorkout03 >= 1) {
   //         countinprogress += 1;
   //       }
-  //       if (userData.currentProgressUserWO4 < 3 &&
-  //           userData.currentProgressUserWO4 >= 1) {
+  //       if (userData.progressWorkout04 < 3 &&
+  //           userData.progressWorkout04 >= 1) {
   //         countinprogress += 1;
   //       }
   //       print(countinprogress);

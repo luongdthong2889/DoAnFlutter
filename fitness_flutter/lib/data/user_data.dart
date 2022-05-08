@@ -7,16 +7,16 @@ class UserData {
   String? name;
   String? photo;
   String? mail;
-  int? currentProgressUserWO1;
-  int? workoutsfinishedWO1;
-  int? currentProgressUserWO2;
-  int? workoutsfinishedWO2;
-  int? currentProgressUserWO3;
-  int? workoutsfinishedWO3;
-  int? currentProgressUserWO4;
-  int? workoutsfinishedWO4;
+  int? progressWorkout01;
+  int? finishedWorkout01;
+  int? progressWorkout02;
+  int? finishedWorkout02;
+  int? progressWorkout03;
+  int? finishedWorkout03;
+  int? progressWorkout04;
+  int? finishedWorkout04;
   int? time;
-  int? percentwo;
+  int? percentProgressWorkout;
   List<WorkoutData>? workouts;
 
   UserData({
@@ -25,30 +25,30 @@ class UserData {
     required this.mail,
     required this.workouts,
     this.id,
-    this.currentProgressUserWO1,
-    this.workoutsfinishedWO1,
-    this.currentProgressUserWO2,
-    this.workoutsfinishedWO2,
-    this.currentProgressUserWO3,
-    this.workoutsfinishedWO3,
-    this.currentProgressUserWO4,
-    this.workoutsfinishedWO4,
+    this.progressWorkout01,
+    this.finishedWorkout01,
+    this.progressWorkout02,
+    this.finishedWorkout02,
+    this.progressWorkout03,
+    this.finishedWorkout03,
+    this.progressWorkout04,
+    this.finishedWorkout04,
     this.time,
-    this.percentwo,
+    this.percentProgressWorkout,
   });
 
   UserData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     time = json['time'];
-    percentwo = json['percentwo'];
-    currentProgressUserWO1 = json['currentProgressUserWO1'];
-    workoutsfinishedWO1 = json['workoutsfinishedWO1'];
-    currentProgressUserWO2 = json['currentProgressUserWO2'];
-    workoutsfinishedWO2 = json['workoutsfinishedWO2'];
-    currentProgressUserWO3 = json['currentProgressUserWO3'];
-    workoutsfinishedWO3 = json['workoutsfinishedWO3'];
-    currentProgressUserWO4 = json['currentProgressUserWO4'];
-    workoutsfinishedWO4 = json['workoutsfinishedWO4'];
+    percentProgressWorkout = json['percentProgressWorkout'];
+    progressWorkout01 = json['progressWorkout01'];
+    finishedWorkout01 = json['finishedWorkout01'];
+    progressWorkout02 = json['progressWorkout02'];
+    finishedWorkout02 = json['finishedWorkout02'];
+    progressWorkout03 = json['progressWorkout03'];
+    finishedWorkout03 = json['finishedWorkout03'];
+    progressWorkout04 = json['progressWorkout04'];
+    finishedWorkout04 = json['finishedWorkout04'];
     name = json['name'];
     photo = json['photo'];
     mail = json['mail'];
@@ -64,15 +64,15 @@ class UserData {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['time'] = this.time;
-    data['percentwo'] = this.percentwo;
-    data['currentProgressUserWO1'] = this.currentProgressUserWO1;
-    data['workoutsfinishedWO1'] = this.workoutsfinishedWO1;
-    data['currentProgressUserWO2'] = this.currentProgressUserWO2;
-    data['workoutsfinishedWO2'] = this.workoutsfinishedWO2;
-    data['currentProgressUserWO3'] = this.currentProgressUserWO3;
-    data['workoutsfinishedWO3'] = this.workoutsfinishedWO3;
-    data['currentProgressUserWO4'] = this.currentProgressUserWO4;
-    data['workoutsfinishedWO4'] = this.workoutsfinishedWO4;
+    data['percentProgressWorkout'] = this.percentProgressWorkout;
+    data['progressWorkout01'] = this.progressWorkout01;
+    data['finishedWorkout01'] = this.finishedWorkout01;
+    data['progressWorkout02'] = this.progressWorkout02;
+    data['finishedWorkout02'] = this.finishedWorkout02;
+    data['progressWorkout03'] = this.progressWorkout03;
+    data['finishedWorkout03'] = this.finishedWorkout03;
+    data['progressWorkout04'] = this.progressWorkout04;
+    data['finishedWorkout04'] = this.finishedWorkout04;
     data['name'] = this.name;
     data['photo'] = this.photo;
     data['mail'] = this.mail;
