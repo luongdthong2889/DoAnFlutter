@@ -17,6 +17,8 @@ class ColorConstants {
   static const homeBackgroundColor = Color.fromRGBO(252, 252, 252, 1);
   static const textGrey = Color(0xFF8F98A3);
 
-  static const cardioColor = Color(0xFFFCB74F);
-  static const armsColor = Color(0xFF5C9BA4);
+  static const yogaColor = Color(0xFFFCB74F);
+  static const fullBodyColor = Color(0xFF5C9BA4);
+  static const pilatesColor = Color(0xFF9C27B0);
+  static const stretchingColor = Color(0xFFFF4081);
 }

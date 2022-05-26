@@ -32,13 +32,12 @@ class HomeContent extends StatefulWidget {
 }
 
 class _HomeContentState extends State<HomeContent> {
-
-    @override
+  @override
   void initState() {
     super.initState();
     getData();
   }
-  
+
   final userData = UserData.fromFirebase(HomeContent.auth.currentUser);
   final db = FirebaseFirestore.instance;
 
@@ -221,14 +220,31 @@ class _HomeContentState extends State<HomeContent> {
             children: [
               const SizedBox(width: 20),
               WorkoutCard(
-                  color: ColorConstants.cardioColor,
-                  workout: DataConstants.workouts[0],
-                  onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                      builder: (_) => WorkoutDetailsPage(
-                          workout: DataConstants.workouts[0])))),
+                color: ColorConstants.yogaColor,
+                workout: DataConstants.workouts[0],
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => WorkoutDetailsPage(
+                      workout: DataConstants.workouts[0],
+                    ),
+                  ),
+                ),
+              ),
               const SizedBox(width: 15),
               WorkoutCard(
-                color: ColorConstants.armsColor,
+                color: ColorConstants.pilatesColor,
+                workout: DataConstants.workouts[1],
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => WorkoutDetailsPage(
+                      workout: DataConstants.workouts[1],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
+              WorkoutCard(
+                color: ColorConstants.fullBodyColor,
                 workout: DataConstants.workouts[2],
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
@@ -239,6 +255,18 @@ class _HomeContentState extends State<HomeContent> {
                 ),
               ),
               const SizedBox(width: 20),
+              WorkoutCard(
+                color: ColorConstants.stretchingColor,
+                workout: DataConstants.workouts[3],
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => WorkoutDetailsPage(
+                      workout: DataConstants.workouts[3],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(width: 15),
             ],
           ),
         ),
