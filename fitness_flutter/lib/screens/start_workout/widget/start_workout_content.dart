@@ -48,7 +48,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
 
   final db = FirebaseFirestore.instance;
 
-  static var inprogress = [];
+  static var inProgress = [];
   static int timeSent = 0;
   static int percent = 0;
   List<WorkoutData> workouts = <WorkoutData>[];
@@ -70,29 +70,29 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
       userData.time = data['time'];
       userData.percentProgressWorkout = data['percentProgressWorkout'];
     }
-    inprogress = [
+    inProgress = [
       userData.progressWorkout01,
       userData.progressWorkout02,
       userData.progressWorkout03,
       userData.progressWorkout04,
     ];
-    print(inprogress);
-    if (inprogress.where((element) => element < 3 && element > 0).length == 1) {
+    print(inProgress);
+    if (inProgress.where((element) => element < 3 && element > 0).length == 1) {
       userData.percentProgressWorkout = 25;
       percent = 25;
-    } else if (inprogress
+    } else if (inProgress
             .where((element) => element < 3 && element > 0)
             .length ==
         2) {
       userData.percentProgressWorkout = 50;
       percent = 50;
-    } else if (inprogress
+    } else if (inProgress
             .where((element) => element < 3 && element > 0)
             .length ==
         3) {
       userData.percentProgressWorkout = 75;
       percent = 75;
-    } else if (inprogress
+    } else if (inProgress
             .where((element) => element < 3 && element > 0)
             .length ==
         4) {

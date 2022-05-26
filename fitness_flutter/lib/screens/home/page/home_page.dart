@@ -44,11 +44,11 @@ class HomePage extends StatelessWidget {
   Future getDoc() async {
     var a = await db.collection('users').doc(userData.id).get();
     if(!a.exists){
-      pustUserDataInit();
+      _pustUserDataInit();
     }
   }
 
-  pustUserDataInit(){
+  _pustUserDataInit(){
     userData.progressWorkout01 = 0;
     userData.progressWorkout02 = 0;
     userData.progressWorkout03 = 0;

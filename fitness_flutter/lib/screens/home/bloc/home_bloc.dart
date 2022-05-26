@@ -70,21 +70,21 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   //       print(count);
   //       if (userData.progressWorkout01 < 3 &&
   //           userData.progressWorkout01 >= 1) {
-  //         countinprogress += 1;
+  //         countinProgress += 1;
   //       }
   //       if (userData.progressWorkout02 < 3 &&
   //           userData.progressWorkout02 >= 1) {
-  //         countinprogress += 1;
+  //         countinProgress += 1;
   //       }
   //       if (userData.progressWorkout03 < 3 &&
   //           userData.progressWorkout03 >= 1) {
-  //         countinprogress += 1;
+  //         countinProgress += 1;
   //       }
   //       if (userData.progressWorkout04 < 3 &&
   //           userData.progressWorkout04 >= 1) {
-  //         countinprogress += 1;
+  //         countinProgress += 1;
   //       }
-  //       print(countinprogress);
+  //       print(countinProgress);
   //     }
   //   });
   // }
@@ -107,7 +107,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     return completedWorkouts.length;
   }
 
-  int? getInProgressWorkouts() {
+  int? getinProgressWorkouts() {
     final completedWorkouts = workouts.where(
         (w) => (w.currentProgress ?? 0) > 0 && w.currentProgress != w.progress);
     return completedWorkouts.length;

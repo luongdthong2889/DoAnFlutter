@@ -25,7 +25,7 @@ class _HomeStatisticsState extends State<HomeStatistics> {
   }
 
   static var finish = [];
-  static var inprogress = [];
+  static var inProgress = [];
   static final FirebaseAuth auth = FirebaseAuth.instance;
   final userData = UserData.fromFirebase(auth.currentUser);
   static int timesent = 0;
@@ -51,15 +51,15 @@ class _HomeStatisticsState extends State<HomeStatistics> {
       userData.finishedWorkout03,
       userData.finishedWorkout04,
     ];
-    inprogress = [
+    inProgress = [
       userData.progressWorkout01,
       userData.progressWorkout02,
       userData.progressWorkout03,
       userData.progressWorkout04,
     ];
     timesent = userData.time ?? 0; 
-    print(inprogress);
-    print(inprogress.where((element) => element < 3 && element > 0).length);
+    print(inProgress);
+    print(inProgress.where((element) => element < 3 && element > 0).length);
     print(userData.time);
   }
 
@@ -151,7 +151,7 @@ class _HomeStatisticsState extends State<HomeStatistics> {
           icon: PathConstants.inProgress,
           title: TextConstants.inProgress,
           // count: bloc.getInProgressWorkouts() ?? 0,
-          count: inprogress.where((element) => element < 3 && element > 0).length,
+          count: inProgress.where((element) => element < 3 && element > 0).length,
           text: TextConstants.workouts,
         ),
         const SizedBox(height: 20),
