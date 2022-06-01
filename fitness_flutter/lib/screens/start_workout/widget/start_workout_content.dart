@@ -10,12 +10,11 @@ import 'package:fitness_flutter/data/exercise_data.dart';
 import 'package:fitness_flutter/data/user_data.dart';
 import 'package:fitness_flutter/data/workout_data.dart';
 import 'package:fitness_flutter/screens/common_widgets/fitness_button.dart';
-import 'package:fitness_flutter/screens/home/page/confetti_page.dart';
 import 'package:fitness_flutter/screens/start_workout/bloc/start_workout_bloc.dart';
-import 'package:fitness_flutter/screens/start_workout/page/start_workout_page.dart';
 import 'package:fitness_flutter/screens/start_workout/widget/start_workout_video.dart';
 import 'package:fitness_flutter/screens/workout_details_screen/bloc/workout_details_bloc.dart'
     as workout_bloc;
+import 'package:fitness_flutter/screens/home/page/confetti_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -468,10 +467,8 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
           }
         } else {
           await _saveWorkout(widget.workout.exerciseDataList!.length - 1);
-
-          // Navigator.pop(context, widget.workout);
-          Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => ConfettiPage()));
+          Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => ConfettiPage(workout: widget.workout)));
         }
       },
     );

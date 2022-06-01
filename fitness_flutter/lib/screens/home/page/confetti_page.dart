@@ -1,12 +1,16 @@
 import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:fitness_flutter/core/const/color_constants.dart';
+import 'package:fitness_flutter/data/workout_data.dart';
 import 'package:fitness_flutter/screens/common_widgets/fitness_button.dart';
 import 'package:fitness_flutter/screens/tab_bar/page/tab_bar_page.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
 class ConfettiPage extends StatefulWidget {
+  final WorkoutData workout;
+  ConfettiPage({required this.workout});
+
   @override
   _ConfettiPageState createState() => _ConfettiPageState();
 }
@@ -94,7 +98,8 @@ class _ConfettiPageState extends State<ConfettiPage> {
           title: "Workout Again",
           onTap: () {
             controllerTopCenter.play();
-            Navigator.of(context).pushReplacement(
+            Navigator.pushReplacement(
+              context,
               PageRouteBuilder(
                 pageBuilder: (c, a1, a2) => TabBarPage(),
                 transitionsBuilder: (c, anim, a2, child) =>
