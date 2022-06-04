@@ -56,7 +56,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
   List<ExerciseData> exercises = <ExerciseData>[];
 
   Future getData() async {
-    var docsnapshot = await db.collection("users").doc(userData.id).get();
+    var docsnapshot = await db.collection("user_data").doc(userData.id).get();
     if (docsnapshot.exists) {
       Map<String, dynamic> data = docsnapshot.data()!;
       userData.finishedWorkout01 = data['finishedWorkout01'];
@@ -283,7 +283,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
             // });
             // print(timeSent);
             FirebaseFirestore.instance
-                .collection('users')
+                .collection('user_data')
                 .doc(userData.id)
                 .update({
               'progressWorkout01': currentExerciseIndex + 1,
@@ -302,7 +302,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
               userData.time = timeSent;
             }
             FirebaseFirestore.instance
-                .collection('users')
+                .collection('user_data')
                 .doc(userData.id)
                 .update({
               'progressWorkout02': currentExerciseIndex + 1,
@@ -321,7 +321,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
               userData.time = timeSent;
             }
             FirebaseFirestore.instance
-                .collection('users')
+                .collection('user_data')
                 .doc(userData.id)
                 .update({
               'progressWorkout03': currentExerciseIndex + 1,
@@ -340,7 +340,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
               userData.time = timeSent;
             }
             FirebaseFirestore.instance
-                .collection('users')
+                .collection('user_data')
                 .doc(userData.id)
                 .update({
               'progressWorkout04': currentExerciseIndex + 1,
@@ -375,7 +375,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
             }
             // print(timeSent);
             FirebaseFirestore.instance
-                .collection('users')
+                .collection('user_data')
                 .doc(userData.id)
                 .update({
               'progressWorkout01': currentExerciseIndex + 1,
@@ -400,7 +400,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
               userData.time = timeSent;
             }
             FirebaseFirestore.instance
-                .collection('users')
+                .collection('user_data')
                 .doc(userData.id)
                 .update({
               'progressWorkout02': currentExerciseIndex + 1,
@@ -425,7 +425,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
               timeSent = timeSent + widget.exercise.minutes!.toInt();
             }
             FirebaseFirestore.instance
-                .collection('users')
+                .collection('user_data')
                 .doc(userData.id)
                 .update({
               'progressWorkout03': currentExerciseIndex + 1,
@@ -450,7 +450,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
               timeSent = timeSent + widget.exercise.minutes!.toInt();
             }
             FirebaseFirestore.instance
-                .collection('users')
+                .collection('user_data')
                 .doc(userData.id)
                 .update({
               'progressWorkout04': currentExerciseIndex + 1,

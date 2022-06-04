@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
   }
 
   Future getDoc() async {
-    var a = await db.collection('users').doc(userData.id).get();
+    var a = await db.collection('user_data').doc(userData.id).get();
     if(!a.exists){
       _pustUserDataInit();
     }

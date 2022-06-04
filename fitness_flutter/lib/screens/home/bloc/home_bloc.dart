@@ -46,7 +46,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   // Future getUserData() async {
-  //   var collection = FirebaseFirestore.instance.collection('users');
+  //   var collection = FirebaseFirestore.instance.collection('user_data');
   //   collection.doc(userData.id).snapshots().listen((docSnapshot) {
   //     if (docSnapshot.exists) {
   //       Map<String, dynamic> data = docSnapshot.data()!;

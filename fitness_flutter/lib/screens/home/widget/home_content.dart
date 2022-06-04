@@ -42,7 +42,7 @@ class _HomeContentState extends State<HomeContent> {
   final db = FirebaseFirestore.instance;
 
   Future getData() async {
-    var docsnapshot = await db.collection("users").doc(userData.id).get();
+    var docsnapshot = await db.collection("user_data").doc(userData.id).get();
     if (docsnapshot.exists) {
       Map<String, dynamic> data = docsnapshot.data()!;
       userData.percentProgressWorkout = data['percentProgressWorkout'];

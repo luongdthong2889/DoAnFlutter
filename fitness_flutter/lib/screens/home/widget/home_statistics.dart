@@ -31,7 +31,7 @@ class _HomeStatisticsState extends State<HomeStatistics> {
   static int timesent = 0;
   final db = FirebaseFirestore.instance;
   Future getData() async {
-    var docsnapshot = await db.collection("users").doc(userData.id).get();
+    var docsnapshot = await db.collection("user_data").doc(userData.id).get();
     if (docsnapshot.exists) {
       Map<String, dynamic> data = docsnapshot.data()!;
       userData.finishedWorkout01 = data['finishedWorkout01'];

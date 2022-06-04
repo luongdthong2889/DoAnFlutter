@@ -6,11 +6,11 @@ class FirebaseApi {
   static Future<void> createUserData(UserData userData) async {
     final db = FirebaseFirestore.instance;
 
-    db.collection("users").doc(userData.id).set(userData.toJson());
+    db.collection("user_data").doc(userData.id).set(userData.toJson());
   }
 
   static Future<void> getUsetData(UserData userData) async {
-    var collection = FirebaseFirestore.instance.collection('users');
+    var collection = FirebaseFirestore.instance.collection('user_data');
     collection.doc(userData.id).snapshots().listen((docSnapshot) {
       if (docSnapshot.exists) {
         Map<String, dynamic> data = docSnapshot.data()!;
