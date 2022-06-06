@@ -24,7 +24,6 @@ class _WorkoutContentState extends State<WorkoutContent> {
     super.initState();
     getData();
   }
-
   bool isLoading = false;
   static final FirebaseAuth auth = FirebaseAuth.instance;
   final userData = UserData.fromFirebase(auth.currentUser);
@@ -75,8 +74,7 @@ class _WorkoutContentState extends State<WorkoutContent> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                children: <Widget>[
+              Row(children: <Widget>[
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Text(
@@ -112,27 +110,44 @@ class _WorkoutContentState extends State<WorkoutContent> {
   }
 
   Widget _createWorkoutCard(WorkoutData workoutData) {
-    print(isLoading);
-    fetchData(workoutData);
+    //print(isLoading);
+    //fetchData(workoutData);
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
-      child: WorkoutCard(workout: workoutData),
+      child: FutureBuilder(
+          future: fetchData(workoutData),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return WorkoutCard(workout: workoutData);
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          }),
     );
   }
 
-  fetchData(WorkoutData workoutData) {
+  Future fetchData(WorkoutData workoutData) async {
     if (workoutData.id == "1") {
-      workoutData.currentProgress = userData.progressWorkout01 ?? 0;
+      if (userData.progressWorkout01 != null) {
+        workoutData.currentProgress = userData.progressWorkout01;
+      }
     }
     if (workoutData.id == "2") {
-      workoutData.currentProgress = userData.progressWorkout02 ?? 0;
+      if (userData.progressWorkout02 != null) {
+        workoutData.currentProgress = userData.progressWorkout02;
+      }
     }
     if (workoutData.id == "3") {
-      workoutData.currentProgress = userData.progressWorkout03 ?? 0;
+      if (userData.progressWorkout03 != null) {
+        workoutData.currentProgress = userData.progressWorkout03;
+      }
     }
     if (workoutData.id == "4") {
-      workoutData.currentProgress = userData.progressWorkout04 ?? 0;
+      if (userData.progressWorkout04 != null) {
+        workoutData.currentProgress = userData.progressWorkout04;
+      }
     }
     isLoading = true;
+    return workoutData;
   }
 }

@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness_flutter/core/const/data_constants.dart';
 import 'package:fitness_flutter/core/service/firebase_cloud_api.dart';
 import 'package:fitness_flutter/data/user_data.dart';
+import 'package:fitness_flutter/data/workout_data.dart';
 import 'package:fitness_flutter/screens/home/bloc/home_bloc.dart';
 import 'package:fitness_flutter/screens/home/widget/home_content.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +13,7 @@ class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
   
   static final FirebaseAuth auth = FirebaseAuth.instance;
+  List<WorkoutData> workouts = DataConstants.workouts;
   final userData = UserData.fromFirebase(auth.currentUser);
   final db = FirebaseFirestore.instance;
   @override
