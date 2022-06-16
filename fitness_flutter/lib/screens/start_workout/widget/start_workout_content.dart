@@ -77,6 +77,9 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
       userData.progressWorkout04,
     ];
     print(inProgress);
+    if(userData.time == 0){
+      timeSent = 0;
+    }
     if (inProgress.where((element) => element < 3 && element > 0).length == 1) {
       userData.percentProgressWorkout = 25;
       percent = 25;
@@ -355,7 +358,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
           int currentExerciseIndex = exercisesList!.indexOf(widget.exercise);
           print(currentExerciseIndex.toString() +
               'okayyyyyyyyyyyyyyyyyyyyyyyyyyyyy2222222222222222222222222222');
-          await _saveWorkout(currentExerciseIndex);
+          // await _saveWorkout(currentExerciseIndex);
 
           if (widget.workout.id == "1") {
             List<ExerciseData>? exercisesList = bloc.workout.exerciseDataList;
@@ -466,7 +469,7 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
             ));
           }
         } else {
-          await _saveWorkout(widget.workout.exerciseDataList!.length - 1);
+          // await _saveWorkout(widget.workout.exerciseDataList!.length - 1);
           Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => ConfettiPage(workout: widget.workout)));
         }
@@ -474,14 +477,14 @@ class _StartWorkoutContentState extends State<StartWorkoutContent> {
     );
   }
 
-  Future<void> _saveWorkout(int exerciseIndex) async {
-    if (widget.workout.currentProgress! < exerciseIndex + 1) {
-      widget.workout.currentProgress = exerciseIndex + 1;
-    }
-    widget.workout.exerciseDataList![exerciseIndex].progress = 1;
+  // Future<void> _saveWorkout(int exerciseIndex) async {
+  //   if (widget.workout.currentProgress! < exerciseIndex + 1) {
+  //     widget.workout.currentProgress = exerciseIndex + 1;
+  //   }
+  //   widget.workout.exerciseDataList![exerciseIndex].progress = 1;
 
-    await DataService.saveWorkout(widget.workout);
-  }
+  //   await DataService.saveWorkout(widget.workout);
+  // }
 }
 
 class Step extends StatelessWidget {

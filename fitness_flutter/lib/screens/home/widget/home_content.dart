@@ -138,9 +138,8 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   Widget _showStartWorkout(BuildContext context, HomeBloc bloc) {
-    return widget.workouts.isEmpty
-        ? _createStartWorkout(context, bloc)
-        : HomeStatistics();
+    return 
+        HomeStatistics();
   }
 
   Widget _createStartWorkout(BuildContext context, HomeBloc bloc) {
@@ -275,7 +274,7 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   Widget _showProgress(HomeBloc bloc) {
-    return widget.workouts.isNotEmpty ? _createProgress(bloc) : Container();
+    return _createProgress(bloc);
   }
 
   Widget _createProgress(HomeBloc bloc) {
@@ -307,7 +306,7 @@ class _HomeContentState extends State<HomeContent> {
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 3),
                 Text(
-                  '${TextConstants.profileSuccessful} ${bloc.getProgressPercentage()}% of workouts.',
+                  '${TextConstants.profileSuccessful} ${userData.percentProgressWorkout ?? 0}% of workouts.',
                   style: TextStyle(fontSize: 16),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,

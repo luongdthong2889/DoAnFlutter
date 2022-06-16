@@ -24,6 +24,7 @@ class _WorkoutContentState extends State<WorkoutContent> {
     super.initState();
     getData();
   }
+
   bool isLoading = false;
   static final FirebaseAuth auth = FirebaseAuth.instance;
   final userData = UserData.fromFirebase(auth.currentUser);
@@ -33,6 +34,7 @@ class _WorkoutContentState extends State<WorkoutContent> {
       isLoading = false;
     });
     setState(() {
+      getData();
       isLoading = true;
     });
   }
@@ -84,7 +86,23 @@ class _WorkoutContentState extends State<WorkoutContent> {
                 ),
                 const SizedBox(width: 100),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    FirebaseFirestore.instance
+                        .collection('user_data')
+                        .doc(userData.id)
+                        .update({
+                      'progressWorkout01': 0,
+                      'progressWorkout02': 0,
+                      'progressWorkout03': 0,
+                      'progressWorkout04': 0,
+                      'finishedWorkout01': 0,
+                      'finishedWorkout02': 0,
+                      'finishedWorkout03': 0,
+                      'finishedWorkout04': 0,
+                      'time': 0,
+                      'percentProgressWorkout': 0,
+                    });
+                  },
                   child: Text(
                     "Reset progress",
                     style: TextStyle(
@@ -117,37 +135,61 @@ class _WorkoutContentState extends State<WorkoutContent> {
       child: FutureBuilder(
           future: fetchData(workoutData),
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return WorkoutCard(workout: workoutData);
-            } else {
-              return Center(child: CircularProgressIndicator());
+            if(isLoading == true && snapshot.hasData){
+              return WorkoutCard( workout: workoutData);
             }
+              return Center(child: CircularProgressIndicator());
           }),
     );
   }
 
-  Future fetchData(WorkoutData workoutData) async {
+  Future fetchData(WorkoutData workoutData) => Future.delayed(Duration(seconds: 1), () {
     if (workoutData.id == "1") {
       if (userData.progressWorkout01 != null) {
-        workoutData.currentProgress = userData.progressWorkout01;
+         workoutData.currentProgress = userData.progressWorkout01 ?? 0;
       }
     }
     if (workoutData.id == "2") {
       if (userData.progressWorkout02 != null) {
-        workoutData.currentProgress = userData.progressWorkout02;
+        workoutData.currentProgress = userData.progressWorkout02 ?? 0;
       }
     }
     if (workoutData.id == "3") {
       if (userData.progressWorkout03 != null) {
-        workoutData.currentProgress = userData.progressWorkout03;
+        workoutData.currentProgress = userData.progressWorkout03 ?? 0;
       }
     }
     if (workoutData.id == "4") {
       if (userData.progressWorkout04 != null) {
-        workoutData.currentProgress = userData.progressWorkout04;
+        workoutData.currentProgress =  userData.progressWorkout04 ?? 0;
       }
     }
     isLoading = true;
     return workoutData;
-  }
+      });
+
+  // Future fetchData(WorkoutData workoutData)  async {
+  //   if (workoutData.id == "1") {
+  //     if (userData.progressWorkout01 != null) {
+  //        workoutData.currentProgress = await userData.progressWorkout01 ?? 0;
+  //     }
+  //   }
+  //   if (workoutData.id == "2") {
+  //     if (userData.progressWorkout02 != null) {
+  //       workoutData.currentProgress = await userData.progressWorkout02 ?? 0;
+  //     }
+  //   }
+  //   if (workoutData.id == "3") {
+  //     if (userData.progressWorkout03 != null) {
+  //       workoutData.currentProgress = await userData.progressWorkout03 ?? 0;
+  //     }
+  //   }
+  //   if (workoutData.id == "4") {
+  //     if (userData.progressWorkout04 != null) {
+  //       workoutData.currentProgress = await userData.progressWorkout04 ?? 0;
+  //     }
+  //   }
+  //   isLoading = true;
+  //   return workoutData;
+  // }
 }
